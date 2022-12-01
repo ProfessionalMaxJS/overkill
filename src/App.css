@@ -9,7 +9,7 @@
 }
 
 .App-logo:active {
-  height: 80vmin;
+  animation-play-state: paused;
 }
 
 @media (prefers-reduced-motion: no-preference) {
