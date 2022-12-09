@@ -1,17 +1,43 @@
 import React from 'react';
-import logo from './logo.svg';
+// import logo from './logo.svg';
 import './App.css';
+import { useEffect } from 'react';
 
-const elloGuvnah = () => {
-  console.log("elloGuvnah!!")
-}
 
 function App() {
+
+  function handleCallbackResponse(response){
+    console.log("Encoded JWT ID token: ", response)
+  }
+  
+  const elloGuvnah = () => {
+    console.log("elloGuvnah!!")
+  }
+
+  useEffect(()=>{
+    /*woah, comments can affect the linter?*/
+    /*global google*/
+    google.accounts.id.initialize({
+      client_id: "40106880815-qal4sep4j5395s40la133a9nm900ac47.apps.googleusercontent.com",
+      // callback: elloGuvnah
+      callback: handleCallbackResponse
+    })
+    
+    google.accounts.id.renderButton(
+      document.getElementById("signInDiv"),
+      { theme: "outline", size: "large" }
+    )
+  }, [])
+
+
   return (
     <>
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" onClick={elloGuvnah} />
+
+      <div id="signInDiv"></div>
+
+        {/* <img src={logo} className="App-logo" alt="logo" onClick={elloGuvnah} />
         <p>
           Edit <code>src/App.js</code> and save to reload.
         </p>
@@ -22,24 +48,12 @@ function App() {
           rel="noopener noreferrer"
           >
           Learn React
-        </a>
-        <script src="https://accounts.google.com/gsi/client" async defer></script>
-      <div id="g_id_onload"
-         data-client_id="YOUR_GOOGLE_CLIENT_ID"
-         data-login_uri="https://your.domain/your_login_endpoint"
-        //  data-auto_prompt="false"
-         >
-      </div>
-      <div class="g_id_signin"
-         data-type="standard"
-         data-size="large"
-         data-theme="outline"
-         data-text="sign_in_with"
-         data-shape="rectangular"
-         data-logo_alignment="left">
-      </div>
+        </a> */}
           </header>
-        </div>
+        </div>      
+
+
+        
 </>
   );
 }
