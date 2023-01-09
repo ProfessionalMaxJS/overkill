@@ -1,18 +1,20 @@
 import React from 'react';
 // import logo from './logo.svg';
 import './App.css';
+import jwt_decode from 'jwt-decode';
 import { useEffect } from 'react';
-
 
 function App() {
 
   function handleCallbackResponse(response){
     console.log("Encoded JWT ID token: ", response)
+    let userObj = jwt_decode(response.credential)
+    console.log(userObj)
   }
   
-  const elloGuvnah = () => {
-    console.log("elloGuvnah!!")
-  }
+  // const elloGuvnah = () => {
+  //   console.log("elloGuvnah!!")
+  // }
 
   useEffect(()=>{
     /*woah, comments can affect the linter?*/
