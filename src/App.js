@@ -2,14 +2,19 @@ import React from 'react';
 // import logo from './logo.svg';
 import './App.css';
 import jwt_decode from 'jwt-decode';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 function App() {
+
+  const [ user, setUser ] = useState({});
+
 
   function handleCallbackResponse(response){
     console.log("Encoded JWT ID token: ", response)
     let userObj = jwt_decode(response.credential)
     console.log(userObj)
+    setUser(userObj)
+    document.getElementById("signInDiv").hidden = true;
   }
   
   // const elloGuvnah = () => {
@@ -31,13 +36,24 @@ function App() {
     )
   }, [])
 
+  const handleSignOut = (e) => {
+    setUser({});
+    document.getElementById("signInDiv").hidden = false;
+  }
 
+//if we have no user: signIn Button
+//if we have user: logOut Button
   return (
     <>
     <div className="App">
       <header className="App-header">
 
       <div id="signInDiv"></div>
+      {Object.keys(user).length > 0 && 
+        <div>
+          <button onClick={e=>handleSignOut()} style={{fontWeight:"bolder"}}>LEAVE</button>
+        </div>
+      }
 
         {/* <img src={logo} className="App-logo" alt="logo" onClick={elloGuvnah} />
         <p>
