@@ -15,6 +15,7 @@ function App() {
     console.log(userObj)
     setUser(userObj)
     document.getElementById("signInDiv").hidden = true;
+    document.getElementById("cuteCatPic").hidden = false;
   }
   
   // const elloGuvnah = () => {
@@ -39,6 +40,7 @@ function App() {
   const handleSignOut = (e) => {
     setUser({});
     document.getElementById("signInDiv").hidden = false;
+    document.getElementById("cuteCatPic").hidden = true;
   }
 
 //if we have no user: signIn Button
@@ -54,6 +56,8 @@ function App() {
           <button onClick={e=>handleSignOut()} style={{fontWeight:"bolder"}}>LEAVE</button>
         </div>
       }
+
+      <p id="cuteCatPic" hidden={true}>CUTE CAT PIC</p>
 
         {/* <img src={logo} className="App-logo" alt="logo" onClick={elloGuvnah} />
         <p>
