@@ -37,6 +37,15 @@ function App() {
     )
   }, [])
 
+  useEffect(()=>{
+    fetch("https://api.thecatapi.com/v1/images/search")
+    .then(r=>r.json())
+    .then(payload=>{
+      console.log(payload)
+      setCatUrl(payload[0].url)})
+  }, [user])
+  const [catUrl, setCatUrl] = useState("")
+
   const handleSignOut = (e) => {
     setUser({});
     document.getElementById("signInDiv").hidden = false;
@@ -57,7 +66,7 @@ function App() {
         </div>
       }
 
-      <p id="cuteCatPic" hidden={true}>CUTE CAT PIC</p>
+      <img id="cuteCatPic" src={catUrl} alt="cute cat pic!" hidden={true} width="500" height="500"></img>
 
         {/* <img src={logo} className="App-logo" alt="logo" onClick={elloGuvnah} />
         <p>
